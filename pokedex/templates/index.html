@@ -14,7 +14,7 @@
         <div class="card-group">
             {% for pokemon in pokemons %}
                 <div class="card">
-                    <img src="{{ pokemon.picture.url }}" alt="">
+                    <img src="{{ pokemon.picture.url }}" alt="" style="height:210px; object-fit: scale-down;">
                     <div class="card-body">
                         <h5 class="card-title">{{ pokemon }}</h5>
                         <p class="card-text">Entrenador: {{ pokemon.trainer }}</p>
@@ -22,12 +22,14 @@
                         <a href="pokemon/{{ pokemon.id }}" class="btn btn-primary">
                             <i class="fa-solid fa-eye"></i>
                         </a>
-                        <a href="edit_pokemon/{{ pokemon.id }}" class="btn btn-primary">
-                            <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <a href="delete_pokemon/{{ pokemon.id }}" class="btn btn-danger">
-                            <i class="fa-solid fa-trash"></i>
-                        </a>
+                        {% if user.is_authenticated %} 
+                            <a href="edit_pokemon/{{ pokemon.id }}" class="btn btn-primary">
+                                <i class="fa-solid fa-pencil"></i>
+                            </a>
+                            <a href="delete_pokemon/{{ pokemon.id }}" class="btn btn-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

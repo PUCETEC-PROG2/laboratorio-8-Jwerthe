@@ -5,7 +5,20 @@ class Trainer(models.Model):
     last_name = models.CharField(max_length=30, null=False)
     birth_date = models.DateField(null=False)
     level = models.IntegerField(default=1)
-    region = models.CharField(max_length=30, null=False)
+    TRAINER_REGION = {
+        ('Kanto','Kanto'),
+        ('Johto', 'Johto'),
+        ('Hoenn', 'Hoenn'),
+        ('Sinnoh', 'Sinnoh'),
+        ('Unova', 'Unova'),
+        ('Kalos', 'Kalos'),
+        ('Alola', 'Alola'),
+        ('Galar', 'Galar'),
+        ('Paldea', 'Paldea'),
+    }
+
+    region = models.CharField(max_length=30, choices=TRAINER_REGION, null=False)
+    picture = models.ImageField(upload_to='trainer_images')
     
     def __str__(self) -> str:
         return f'{self.first_name}  {self.last_name}'
@@ -13,12 +26,12 @@ class Trainer(models.Model):
 class Pokemon(models.Model):
     name = models.CharField(max_length=30, null=False)
     POKEMON_TYPES = {
-        ('A', 'Agua'),
-        ('F', 'Fuego'),
-        ('T', 'Tierra'),
-        ('P', 'Planta'),
-        ('E', 'Eléctrico'),
-        ('L', 'Lagartija'),
+        ('Agua', 'Agua'),
+        ('Fuego', 'Fuego'),
+        ('Tierra', 'Tierra'),
+        ('Planta', 'Planta'),
+        ('Eléctrico', 'Eléctrico'),
+        ('Fantasma', 'Fantasma'),
     }
     type = models.CharField(max_length=30, choices=POKEMON_TYPES, null=False)
     weight = models.DecimalField(null=False, default=1, max_digits=4, decimal_places=2)

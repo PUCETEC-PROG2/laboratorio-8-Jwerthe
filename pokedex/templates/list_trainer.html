@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Pokedex{% endblock title %}
+{% block content %}
+
+<div class="card-group">
+    {% for trainer in trainers %}
+        <div class="card">
+            <img src="{{ trainer.picture.url }}" alt="" style="height:350px; object-fit: scale-down;">
+            <div class="card-body">
+                <h5 class="card-title">{{ trainer }}</h5>
+                <p class="card-text">Nivel: {{ trainer.level }}</p>
+                <p class="card-text">Región: {{ trainer.region }}</p>
+                <a href="trainer/{{ trainer.id }}" class="btn btn-primary">
+                    <i class="fa-solid fa-eye"></i>
+                </a>
+                {% if user.is_authenticated %} 
+                    <a href="edit_trainer/{{ trainer.id }}" class="btn btn-primary">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                    <a href="delete_trainer/{{ trainer.id }}" class="btn btn-danger">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock content %}
